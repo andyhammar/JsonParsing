@@ -27,9 +27,19 @@ namespace JsonParsing.Tests
             Assert.AreEqual(113, data.Items.Length);
         }
 
+        [TestMethod]
+        public async Task can_parse_with_jsonobject()
+        {
+            _text = await ReadFile();
+
+            var parser = new JsonJsonObjectParser();
+            IJsonData data = parser.Parse(_text);
+            Assert.AreEqual(113, data.Items.Length);
+        }
+
         private async Task<string> ReadFile()
         {
-            var reader = new JsonReader();
+            var reader = new FileDataReader();
             var text = await reader.ReadAsync("data.json");
             Assert.IsNotNull(text);
             Assert.IsTrue(text.Length > 0);

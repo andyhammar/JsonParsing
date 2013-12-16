@@ -105,8 +105,9 @@
     <Compile Include="IJsonParser.cs" />
     <Compile Include="JsonData.cs" />
     <Compile Include="JsonItem.cs" />
+    <Compile Include="JsonJsonObjectParser.cs" />
     <Compile Include="JsonJsonNetParser.cs" />
-    <Compile Include="JsonReader.cs" />
+    <Compile Include="FileDataReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleJson.cs" />
   </ItemGroup>

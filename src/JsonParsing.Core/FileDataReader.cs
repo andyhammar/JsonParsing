@@ -4,7 +4,7 @@ using Windows.Storage;
 
 namespace JsonParsing.Core
 {
-    public class JsonReader
+    public class FileDataReader
     {
         public async Task<string> ReadAsync(string fileRelativePath)
         {
