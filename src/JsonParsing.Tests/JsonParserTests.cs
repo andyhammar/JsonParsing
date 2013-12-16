@@ -22,7 +22,7 @@ namespace JsonParsing.Tests
         {
             _text = await ReadFile();
 
-            var parser = new JsonJsonNetParser();
+            var parser = new JsonJsonObjectParser();
             IJsonData data = parser.Parse(_text);
             Assert.AreEqual(113, data.Items.Length);
         }
@@ -32,8 +32,27 @@ namespace JsonParsing.Tests
         {
             _text = await ReadFile();
 
-            var parser = new JsonJsonObjectParser();
+            var parser = new JsonJsonNetParser();
             IJsonData data = parser.Parse(_text);
+            Assert.AreEqual(113, data.Items.Length);
+        }
+        [TestMethod]
+        public async Task can_parse_with_simple_json_dynamic()
+        {
+            _text = await ReadFile();
+
+            var parser = new JsonSimpleJsonParser();
+            IJsonData data = parser.ParseDynamic(_text);
+            Assert.AreEqual(113, data.Items.Length);
+        }
+
+        [TestMethod]
+        public async Task can_parse_with_simple_json_dictionary()
+        {
+            _text = await ReadFile();
+
+            var parser = new JsonSimpleJsonParser();
+            IJsonData data = parser.ParseDictionary(_text);
             Assert.AreEqual(113, data.Items.Length);
         }
 

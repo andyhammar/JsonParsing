@@ -1,25 +1,17 @@
 ﻿using System.Linq;
-using Newtonsoft.Json;
 
 namespace JsonParsing.Core
 {
-    public class JsonJsonNetParser : IJsonParser
+    public class JsonJsonObjectParser : IJsonParser
     {
         public IJsonData Parse(string json)
         {
-            //using http://json2csharp.com/
+            var jsonObject = Windows.Data.Json.JsonObject.Parse(json);
+            var episodes = jsonObject.GetObject().GetNamedArray("episodes");
 
-            var obj = JsonConvert.DeserializeObject<RootObject>(json);
-
-            if (obj == null)
-                return null;
-
-            var items = obj.episodes.Select(e => new JsonItem(e.title));
-            var jsonItems = items.Cast<IJsonItem>().ToArray();
-            var result = new JsonData
-            {
-                Items = jsonItems
-            };
+            var result = new JsonData();
+            var jsonItems = episodes.Select(e => new JsonItem(e.GetObject().GetNamedString(("title"))));
+            result.Items = jsonItems.Cast<IJsonItem>().ToArray();
 
             return result;
         }
