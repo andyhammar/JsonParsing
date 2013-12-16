@@ -1,6 +1,6 @@
 ﻿namespace JsonParsing.Core
 {
-    public class DataParser
+    public class JsonParser
     {
          
     }
