@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
 using JsonParsing.Core;
@@ -37,6 +38,7 @@ namespace JsonParsing.Tests
             Assert.AreEqual(113, data.Items.Length);
         }
         [TestMethod]
+        [Ignore]
         public async Task can_parse_with_simple_json_dynamic()
         {
             _text = await ReadFile();
