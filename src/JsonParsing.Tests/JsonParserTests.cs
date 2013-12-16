@@ -9,19 +9,31 @@ namespace JsonParsing.Tests
     [TestClass]
     public class JsonParserTests
     {
-        
+        private string _text;
+
         [TestMethod]
-        public async Task TestMethod1()
+        public async Task can_read_file()
         {
-            await SetUp();
+            _text = await ReadFile();
         }
 
-        private async Task SetUp()
+        [TestMethod]
+        public async Task can_parse_with_json_net()
+        {
+            _text = await ReadFile();
+
+            var parser = new JsonJsonNetParser();
+            IJsonData data = parser.Parse(_text);
+            Assert.AreEqual(113, data.Items.Length);
+        }
+
+        private async Task<string> ReadFile()
         {
             var reader = new JsonReader();
             var text = await reader.ReadAsync("data.json");
             Assert.IsNotNull(text);
             Assert.IsTrue(text.Length > 0);
+            return text;
         }
     }
 }
