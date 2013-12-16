@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 namespace JsonParsing.Tests
 {
     [TestClass]
-    public class DataParserTests
+    public class JsonParserTests
     {
         
         [TestMethod]

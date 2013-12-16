@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace JsonParsing.Core
 {
@@ -6,7 +8,9 @@ namespace JsonParsing.Core
     {
         public async Task<string> ReadAsync(string fileRelativePath)
         {
-            return string.Empty;
+            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + fileRelativePath));
+            var text = await FileIO.ReadTextAsync(file);
+            return text;
         }
     }
 }
