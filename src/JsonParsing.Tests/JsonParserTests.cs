@@ -10,19 +10,17 @@ namespace JsonParsing.Tests
     [TestClass]
     public class JsonParserTests
     {
-        private string _text;
+        private static string _text;
 
-        [TestMethod]
-        public async Task can_read_file()
+        [ClassInitialize]
+        public static void SetUp(TestContext context)
         {
-            _text = await ReadFile();
+            _text = ReadFile().GetAwaiter().GetResult();
         }
 
         [TestMethod]
         public async Task can_parse_with_json_net()
         {
-            _text = await ReadFile();
-
             var parser = new JsonJsonObjectParser();
             IJsonData data = parser.Parse(_text);
             Assert.AreEqual(113, data.Items.Length);
@@ -31,8 +29,6 @@ namespace JsonParsing.Tests
         [TestMethod]
         public async Task can_parse_with_jsonobject()
         {
-            _text = await ReadFile();
-
             var parser = new JsonJsonNetParser();
             IJsonData data = parser.Parse(_text);
             Assert.AreEqual(113, data.Items.Length);
@@ -41,8 +37,6 @@ namespace JsonParsing.Tests
         [Ignore]
         public async Task can_parse_with_simple_json_dynamic()
         {
-            _text = await ReadFile();
-
             var parser = new JsonSimpleJsonParser();
             IJsonData data = parser.ParseDynamic(_text);
             Assert.AreEqual(113, data.Items.Length);
@@ -51,14 +45,18 @@ namespace JsonParsing.Tests
         [TestMethod]
         public async Task can_parse_with_simple_json_dictionary()
         {
-            _text = await ReadFile();
-
             var parser = new JsonSimpleJsonParser();
             IJsonData data = parser.ParseDictionary(_text);
             Assert.AreEqual(113, data.Items.Length);
         }
 
-        private async Task<string> ReadFile()
+        [TestMethod]
+        public async Task speed_measurements()
+        {
+            
+        }
+
+        private async static Task<string> ReadFile()
         {
             var reader = new FileDataReader();
             var text = await reader.ReadAsync("data.json");
