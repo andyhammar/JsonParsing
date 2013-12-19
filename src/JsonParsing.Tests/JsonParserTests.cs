@@ -1,4 +1,7 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
@@ -19,7 +22,7 @@ namespace JsonParsing.Tests
         }
 
         [TestMethod]
-        public async Task can_parse_with_json_net()
+        public void can_parse_with_json_object()
         {
             var parser = new JsonJsonObjectParser();
             IJsonData data = parser.Parse(_text);
@@ -27,7 +30,7 @@ namespace JsonParsing.Tests
         }
 
         [TestMethod]
-        public async Task can_parse_with_jsonobject()
+        public void can_parse_with_json_net()
         {
             var parser = new JsonJsonNetParser();
             IJsonData data = parser.Parse(_text);
@@ -35,7 +38,7 @@ namespace JsonParsing.Tests
         }
         [TestMethod]
         [Ignore]
-        public async Task can_parse_with_simple_json_dynamic()
+        public void can_parse_with_simple_json_dynamic()
         {
             var parser = new JsonSimpleJsonParser();
             IJsonData data = parser.ParseDynamic(_text);
@@ -43,7 +46,7 @@ namespace JsonParsing.Tests
         }
 
         [TestMethod]
-        public async Task can_parse_with_simple_json_dictionary()
+        public void can_parse_with_simple_json_dictionary()
         {
             var parser = new JsonSimpleJsonParser();
             IJsonData data = parser.ParseDictionary(_text);
@@ -51,9 +54,22 @@ namespace JsonParsing.Tests
         }
 
         [TestMethod]
-        public async Task speed_measurements()
+        public void speed_measurements()
         {
-            
+            RunMany(can_parse_with_json_net);
+            RunMany(can_parse_with_json_object);
+            RunMany(can_parse_with_simple_json_dictionary);
+        }
+
+        public void RunMany(Action action, int nbrIterations = 100, [CallerMemberName]string caller = "caller")
+        {
+            var sw = Stopwatch.StartNew();
+            for (int i = 0; i < nbrIterations; i++)
+            {
+                action();
+            }
+            var elapsed = sw.Elapsed;
+            Debug.WriteLine("{0,-40}{1} ms/parse", action.GetMethodInfo().Name, elapsed.TotalMilliseconds / (double)100);
         }
 
         private async static Task<string> ReadFile()
