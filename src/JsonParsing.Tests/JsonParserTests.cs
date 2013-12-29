@@ -34,7 +34,7 @@ namespace JsonParsing.Tests
         public void can_parse_with_json_net_deserialize_object()
         {
             var parser = new JsonJsonNetParser();
-            IJsonData data = parser.ParseWithDeserializeObject(_json);
+            IJsonData data = parser.Parse(_json);
             Assert.AreEqual(113, data.Items.Length);
         }
 
@@ -67,7 +67,7 @@ namespace JsonParsing.Tests
         public void can_parse_with_simple_json_dynamic()
         {
             var parser = new JsonSimpleJsonParser();
-            IJsonData data = parser.ParseDynamic(_json);
+            IJsonData data = parser.Parse(_json);
             Assert.AreEqual(113, data.Items.Length);
         }
 

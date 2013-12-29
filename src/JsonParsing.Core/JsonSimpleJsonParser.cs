@@ -5,7 +5,7 @@ namespace JsonParsing.Core
 {
     public class JsonSimpleJsonParser : IJsonParser
     {
-        public IJsonData ParseDynamic(string json)
+        public IJsonData Parse(string json)
         {
             dynamic jsonObject = SimpleJson.DeserializeObject(json);
             List<object> episodes = jsonObject.episodes;

@@ -9,7 +9,7 @@ namespace JsonParsing.Core
         private static string _episodesName = "episodes";
         private static string _titleName = "title";
 
-        public IJsonData ParseWithDeserializeObject(string json)
+        public IJsonData Parse(string json)
         {
             //using http://json2csharp.com/
 
@@ -40,15 +40,12 @@ namespace JsonParsing.Core
 
         public IJsonData ParseWithJObjectParse(string json, string episodesName, string titleName)
         {
-            //using http://json2csharp.com/
-
             var obj = JObject.Parse(json);
 
             if (obj == null)
                 return null;
 
             var items = obj.GetValue(episodesName).Select(e => new JsonItem(((JObject)e).GetValue(titleName).ToString()));
-
 
             var jsonItems = items.Cast<IJsonItem>().ToArray();
             var result = new JsonData
@@ -61,8 +58,6 @@ namespace JsonParsing.Core
 
         public IJsonData ParseWithJObjectParseStringsInLinqQuery(string json)
         {
-            //using http://json2csharp.com/
-
             var obj = JObject.Parse(json);
 
             if (obj == null)
