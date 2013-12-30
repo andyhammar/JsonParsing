@@ -1,4 +1,6 @@
-﻿namespace JsonParsing.Core
+﻿using System;
+
+namespace JsonParsing.Core
 {
     public interface IJsonData
     {

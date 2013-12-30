@@ -74,5 +74,5 @@ namespace JsonParsing.Core
 
             return result;
         }
-    }
+        }
 }

@@ -27,7 +27,7 @@ namespace JsonParsing.Tests
         {
             var parser = new JsonJsonObjectParser();
             IJsonData data = parser.Parse(_json);
-            Assert.AreEqual(113, data.Items.Length);
+            AssertData(data);
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace JsonParsing.Tests
         {
             var parser = new JsonJsonNetParser();
             IJsonData data = parser.Parse(_json);
-            Assert.AreEqual(113, data.Items.Length);
+            AssertData(data);
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace JsonParsing.Tests
         {
             var parser = new JsonJsonNetParser();
             IJsonData data = parser.ParseWithJObjectParse(_json);
-            Assert.AreEqual(113, data.Items.Length);
+            AssertData(data);
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace JsonParsing.Tests
         {
             var parser = new JsonJsonNetParser();
             IJsonData data = parser.ParseWithJObjectParse(_json);
-            Assert.AreEqual(113, data.Items.Length);
+            AssertData(data);
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace JsonParsing.Tests
         {
             var parser = new JsonJsonNetParser();
             IJsonData data = parser.ParseWithJObjectParseStringsInLinqQuery(_json);
-            Assert.AreEqual(113, data.Items.Length);
+            AssertData(data);
         }
 
         [TestMethod]
@@ -68,7 +68,13 @@ namespace JsonParsing.Tests
         {
             var parser = new JsonSimpleJsonParser();
             IJsonData data = parser.Parse(_json);
+            AssertData(data);
+        }
+
+        private static void AssertData(IJsonData data)
+        {
             Assert.AreEqual(113, data.Items.Length);
+            Assert.AreEqual("Dagens eko kvart i fem 16 december", data.Items[1].Title);
         }
 
         [TestMethod]
@@ -76,7 +82,7 @@ namespace JsonParsing.Tests
         {
             var parser = new JsonSimpleJsonParser();
             IJsonData data = parser.ParseDictionary(_json);
-            Assert.AreEqual(113, data.Items.Length);
+            AssertData(data);
         }
 
         [TestMethod]
